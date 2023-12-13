@@ -6,7 +6,7 @@ import { doNothingForFiveSeconds } from '../services/doNothingService';
 const isLoading = ref(false)
 
 /**
- * Disables form inputs and shows a spinner for five seconds. Then re-enables the inputs.
+ * Shows a "Loading..." Text for five seconds. Then alerts the user.
  */
 const onClickSubmit = async () => {
   isLoading.value = true;
