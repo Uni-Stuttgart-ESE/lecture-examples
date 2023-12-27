@@ -26,9 +26,13 @@ public class App {
         // examples.SE8_timeApiExample();
         // examples.SE11_localTypeInferenceExample();
         // examples.SE14_switchExample();
+        // examples.SE14_helpfulNullPointerExceptionsExample();
         // examples.SE15_textBlockExample();
         // examples.SE15_NPEExample();
         // examples.SE16_recordClassExample();
-        examples.SE17_sealedClassExample();
+        // examples.SE17_sealedClassExample();
+        // examples.se21_virtualThreadsExample();
+        // examples.se21_patternMatchingRecord();
+        // examples.se21_patternMatchingSwitch();
     }
 }

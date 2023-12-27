@@ -184,6 +184,14 @@ public class Examples {
         System.out.println();
     }
 
+    public void SE14_helpfulNullPointerExceptionsExample() {
+        String[][][] x = {{null}, {{null}, null}, null};
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        x[i][j][k] = x[i][j][k].trim();
+    }
+
     /**
      * Exemplifies the usage of Text blocks, a permanent feature in JAVA SE 15
      */
@@ -246,5 +254,56 @@ public class Examples {
 
         ExampleExtensionClass extensionClassObj = new ExampleExtensionClass();
         extensionClassObj.printMessage("\n> Java SE 17 | Example: sealed class example");
+    }
+
+    public void se21_virtualThreadsExample() {
+        long startTime = System.nanoTime();
+        Thread.Builder threadBuilder = Thread.ofVirtual();
+        threadBuilder = Thread.ofPlatform();
+        int total = 10_000_000;
+        System.out.printf("Spawning %,d threads using %s%n", total, threadBuilder.getClass().getName());
+        for (int i = 0; i < total; i++) {
+            threadBuilder.start(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+            });
+        }
+        System.out.printf("Took %.3f s%n", (System.nanoTime() - startTime) / 1e9);
+    }
+
+    sealed interface Shape {
+        static Shape getRandom() {
+            return new Shape[]{new Rectangle(1, 2), new Circle(3), null}[(int) (Math.random() * 2)];
+        }
+    }
+
+    record Rectangle(double length, double width) implements Shape {
+    }
+
+    record Circle(double radius) implements Shape {
+    }
+
+    public void se21_patternMatchingRecord() {
+        Shape shape = Shape.getRandom();
+        if (shape instanceof Rectangle(double length, double width)) {
+            double perimeter = 2 * (length + width);
+        }
+    }
+
+    public void se21_patternMatchingSwitch() {
+        Shape shape = Shape.getRandom();
+        double perimeter = switch (shape) {
+            case Rectangle(double length, double width) -> 2 * (length + width);
+            case Circle(double radius) -> Math.PI * radius * radius;
+            case null -> 0;
+        };
+
+        String original = "a".repeat((int) (Math.random() * 20));
+        String ellipsis = switch (original) {
+            case String s when s.length() > 10 -> s.substring(0, 7) + "...";
+            default -> original;
+        };
     }
 }
