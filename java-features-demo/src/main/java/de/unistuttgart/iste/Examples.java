@@ -190,9 +190,9 @@ public class Examples {
     public void SE15_textBlockExample() {
         String doubleQuotedString = "{\"name\": \"my name\"}";
         String textBlockString = """
-                {
-                	"name": "my name" \
-                }
+                 {
+                     "name": "my name" \
+                 }
                 """;
 
         System.out.println("> Java SE 15 | Example: Text block");
